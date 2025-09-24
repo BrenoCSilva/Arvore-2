@@ -1,0 +1,36 @@
+{
+  "CF877841": {
+    "nome": "Ipê Amarelo",
+    "info_gerais": {
+      "origem": "Brasil",
+      "bioma": "Mata Atlântica, Cerrado",
+      "copa": "Caducifólia (perde as folhas)"
+    },
+    "porte": "grande",
+    "floracao": {
+      "tem": true,
+      "meses": [8, 9]
+    },
+    "frutificacao": {
+      "tem": true,
+      "meses": [9, 10]
+    }
+  },
+  "CEBE7041": {
+    "nome": "Pau Brasil",
+    "info_gerais": {
+      "origem": "Brasil",
+      "bioma": "Mata Atlântica",
+      "copa": "Perenifólia (não perde as folhas)"
+    },
+    "porte": "medio",
+    "floracao": {
+      "tem": true,
+      "meses": [9, 10, 11]
+    },
+    "frutificacao": {
+      "tem": false,
+      "meses": []
+    }
+  }
+}
