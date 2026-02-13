@@ -1,0 +1,214 @@
+<%- include("includes/head") %>
+<%- include("includes/nav") %>
+
+<div class="container">
+
+  <div class="row">
+    <div class="col-lg-2"></div>
+    
+    <div class="col-lg-8 my-3">
+
+        <h4>Preencha o formulário</h4>
+
+        <%- include("includes/messages")%>
+
+        <% if(arvore._id){%>
+            <form action="/arvore/edit/<%= arvore.id%>" method="POST">
+        <%} else { %>
+            <form action="/arvore/register" method="POST">
+        <%} %>
+
+            <div class="form-group">
+              <label>Nome</label>
+              <input value="<%=arvore.nome%>" type="text" class="form-control" name="nome">
+            </div>
+
+            <div class="form-group">
+              <label>Copa</label>
+              <input value="<%=arvore.copa%>" type="text" class="form-control" name="copa">
+            </div>
+
+            <div class="form-group">
+              <label>País de origem</label>
+              <input value="<%=arvore.origem%>" type="text" class="form-control" name="origem">
+            </div>
+
+            <div class="form-group">
+              <label>Bioma</label>
+              <input value="<%=arvore.bioma%>" type="text" class="form-control" name="bioma">
+            </div>
+
+            <div class="form-group d-flex align-items-center">
+                <label class="mb-0 me-3">Porte da árvore:</label>
+            
+                <div class="form-check form-check-inline mb-0">
+                    <input class="form-check-input" type="radio" name="porte" value="baixo" id="porteBaixo" <%= arvore.porte === "baixo" ? 'checked' : '' %> required>
+                    <label class="form-check-label" for="porteBaixo">Baixo</label>
+                </div>
+            
+                <div class="form-check form-check-inline mb-0">
+                    <input class="form-check-input" type="radio" name="porte" value="medio" id="porteMedio" <%= arvore.porte === "medio" ? 'checked' : '' %>  >
+                    <label class="form-check-label" for="porteMedio">Médio</label>
+                </div>
+            
+                <div class="form-check form-check-inline mb-0">
+                    <input class="form-check-input" type="radio" name="porte" value="alto" id="porteAlto" <%= arvore.porte === "alto" ? 'checked' : '' %>>
+                    <label class="form-check-label" for="porteAlto">Alto</label>
+                </div>
+            </div>
+
+            <div class="form-group d-flex align-items-center">
+                <label class="mb-0 me-3">Presença de fruto:</label>
+            
+                <div class="form-check form-check-inline mb-0">
+                    <input class="form-check-input" type="radio" name="temFrutos" id="sim" value="sim" <%= arvore.temFrutos === true ? 'checked' : '' %> required>
+                    <label class="form-check-label" for="sim">Sim</label>
+                </div>
+            
+                <div class="form-check form-check-inline mb-0">
+                    <input class="form-check-input" type="radio" name="temFrutos" id="nao" value="nao" <%= arvore.temFrutos === false ? 'checked' : '' %>>
+                    <label class="form-check-label" for="nao">Não</label>
+                </div>
+            </div>
+
+            <div class="form-group d-flex align-items-center flex-wrap">
+                <label class="mb-0 me-3">Meses de frutificação:</label>
+
+                <div class="form-check form-check-inline mb-0">
+
+                    <input class="form-check-input" type="checkbox" name="mesesFruto" id="jan" value="janeiro" <%= (arvore.mesesFruto && arvore.mesesFruto.includes('janeiro')) ? 'checked' : '' %>>
+                    <label class="form-check-label" for="jan">Jan</label>
+                </div>
+            
+                <div class="form-check form-check-inline mb-0">
+                    <input class="form-check-input" type="checkbox" name="mesesFruto" id="fev" value="fevereiro" <%= (arvore.mesesFruto && arvore.mesesFruto.includes('fevereiro')) ? 'checked' : '' %>>
+                    <label class="form-check-label" for="fev">Fev</label>
+                </div>
+            
+                <div class="form-check form-check-inline mb-0">
+                    <input class="form-check-input" type="checkbox" name="mesesFruto" id="mar" value="marco" <%= (arvore.mesesFruto && arvore.mesesFruto.includes('marco')) ? 'checked' : '' %>>
+                    <label class="form-check-label" for="mar">Mar</label>
+                </div>
+            
+                <div class="form-check form-check-inline mb-0">
+                    <input class="form-check-input" type="checkbox" name="mesesFruto" id="abr" value="abril" <%= (arvore.mesesFruto && arvore.mesesFruto.includes('abril')) ? 'checked' : '' %> >
+                    <label class="form-check-label" for="abr">Abr</label>
+                </div>
+            
+                <div class="form-check form-check-inline mb-0">
+                    <input class="form-check-input" type="checkbox" name="mesesFruto" id="mai" value="maio" <%= (arvore.mesesFruto && arvore.mesesFruto.includes('maio')) ? 'checked' : '' %>>
+                    <label class="form-check-label" for="mai">Mai</label>
+                </div>
+            
+                <div class="form-check form-check-inline mb-0">
+                    <input class="form-check-input" type="checkbox" name="mesesFruto" id="jun" value="junho" <%= (arvore.mesesFruto && arvore.mesesFruto.includes('junho')) ? 'checked' : '' %>>
+                    <label class="form-check-label" for="jun">Jun</label>
+                </div>
+            
+                <div class="form-check form-check-inline mb-0">
+                    <input class="form-check-input" type="checkbox" name="mesesFruto" id="jul" value="julho" <%= (arvore.mesesFruto && arvore.mesesFruto.includes('julho')) ? 'checked' : '' %>>
+                    <label class="form-check-label" for="jul">Jul</label>
+                </div>
+            
+                <div class="form-check form-check-inline mb-0">
+                    <input class="form-check-input" type="checkbox" name="mesesFruto" id="ago" value="agosto" <%= (arvore.mesesFruto && arvore.mesesFruto.includes('agosto')) ? 'checked' : '' %>>
+                    <label class="form-check-label" for="ago">Ago</label>
+                </div>
+            
+                <div class="form-check form-check-inline mb-0">
+                    <input class="form-check-input" type="checkbox" name="mesesFruto" id="set" value="setembro" <%= (arvore.mesesFruto && arvore.mesesFruto.includes('setembro')) ? 'checked' : '' %>>
+                    <label class="form-check-label" for="set">Set</label>
+                </div>
+            
+                <div class="form-check form-check-inline mb-0">
+                    <input class="form-check-input" type="checkbox" name="mesesFruto" id="out" value="outubro" <%= (arvore.mesesFruto && arvore.mesesFruto.includes('outubro')) ? 'checked' : '' %> >
+                    <label class="form-check-label" for="out">Out</label>
+                </div>
+            
+                <div class="form-check form-check-inline mb-0">
+                    <input class="form-check-input" type="checkbox" name="mesesFruto" id="nov" value="novembro" <%= (arvore.mesesFruto && arvore.mesesFruto.includes('novembro')) ? 'checked' : '' %>>
+                    <label class="form-check-label" for="nov">Nov</label>
+                </div>
+            
+                <div class="form-check form-check-inline mb-0">
+                    <input class="form-check-input" type="checkbox" name="mesesFruto" id="dez" value="dezembro" <%= (arvore.mesesFruto && arvore.mesesFruto.includes('dezembro')) ? 'checked' : '' %>>
+                    <label class="form-check-label" for="dez">Dez</label>
+                </div>
+            </div>
+
+            <div class="form-group d-flex align-items-center flex-wrap">
+                <label class="mb-0 me-3">Meses de floração:</label>
+
+                <div class="form-check form-check-inline mb-0">
+                    <input class="form-check-input" type="checkbox" name="mesesFlor" id="jan" value="janeiro" <%= (arvore.mesesFlor && arvore.mesesFlor.includes('janeiro')) ? 'checked' : '' %>>
+                    <label class="form-check-label" for="jan">Jan</label>
+                </div>
+            
+                <div class="form-check form-check-inline mb-0">
+                    <input class="form-check-input" type="checkbox" name="mesesFlor" id="fev" value="fevereiro" <%= (arvore.mesesFlor && arvore.mesesFlor.includes('fevereiro')) ? 'checked' : '' %>>
+                    <label class="form-check-label" for="fev">Fev</label>
+                </div>
+            
+                <div class="form-check form-check-inline mb-0">
+                    <input class="form-check-input" type="checkbox" name="mesesFlor" id="mar" value="marco" <%= (arvore.mesesFlor && arvore.mesesFlor.includes('marco')) ? 'checked' : '' %>>
+                    <label class="form-check-label" for="mar">Mar</label>
+                </div>
+            
+                <div class="form-check form-check-inline mb-0">
+                    <input class="form-check-input" type="checkbox" name="mesesFlor" id="abr" value="abril" <%= (arvore.mesesFlor && arvore.mesesFlor.includes('abril')) ? 'checked' : '' %>>
+                    <label class="form-check-label" for="abr">Abr</label>
+                </div>
+            
+                <div class="form-check form-check-inline mb-0">
+                    <input class="form-check-input" type="checkbox" name="mesesFlor" id="mai" value="maio" <%= (arvore.mesesFlor && arvore.mesesFlor.includes('maio')) ? 'checked' : '' %>>
+                    <label class="form-check-label" for="mai">Mai</label>
+                </div>
+            
+                <div class="form-check form-check-inline mb-0">
+                    <input class="form-check-input" type="checkbox" name="mesesFlor" id="jun" value="junho" <%= (arvore.mesesFlor && arvore.mesesFlor.includes('junho')) ? 'checked' : '' %>>
+                    <label class="form-check-label" for="jun">Jun</label>
+                </div>
+            
+                <div class="form-check form-check-inline mb-0">
+                    <input class="form-check-input" type="checkbox" name="mesesFlor" id="jul" value="julho" <%= (arvore.mesesFlor && arvore.mesesFlor.includes('julho')) ? 'checked' : '' %>>
+                    <label class="form-check-label" for="jul">Jul</label>
+                </div>
+            
+                <div class="form-check form-check-inline mb-0">
+                    <input class="form-check-input" type="checkbox" name="mesesFlor" id="ago" value="agosto"<%= (arvore.mesesFlor && arvore.mesesFlor.includes('agosto')) ? 'checked' : '' %>>
+                    <label class="form-check-label" for="ago">Ago</label>
+                </div>
+            
+                <div class="form-check form-check-inline mb-0">
+                    <input class="form-check-input" type="checkbox" name="mesesFlor" id="set" value="setembro" <%= (arvore.mesesFlor && arvore.mesesFlor.includes('setembro')) ? 'checked' : '' %>>
+                    <label class="form-check-label" for="set">Set</label>
+                </div>
+            
+                <div class="form-check form-check-inline mb-0">
+                    <input class="form-check-input" type="checkbox" name="mesesFlor" id="out" value="outubro" <%= (arvore.mesesFlor && arvore.mesesFlor.includes('outubro')) ? 'checked' : '' %>>
+                    <label class="form-check-label" for="out">Out</label>
+                </div>
+            
+                <div class="form-check form-check-inline mb-0">
+                    <input class="form-check-input" type="checkbox" name="mesesFlor" id="nov" value="novembro" <%= (arvore.mesesFlor && arvore.mesesFlor.includes('novembro')) ? 'checked' : '' %>>
+                    <label class="form-check-label" for="nov">Nov</label>
+                </div>
+            
+                <div class="form-check form-check-inline mb-0">
+                    <input class="form-check-input" type="checkbox" name="mesesFlor" id="dez" value="dezembro" <%= (arvore.mesesFlor && arvore.mesesFlor.includes('dezembro')) ? 'checked' : '' %>>
+                    <label class="form-check-label" for="dez">Dez</label>
+                </div>
+            </div>
+
+
+            <button type="submit" class="btn btn-primary">Salvar</button>
+        </form>
+    </div>
+    
+    <div class="col-lg-2"></div>
+
+  </div>
+
+</div>
+
+<%- include("includes/footer") %>

@@ -1,0 +1,48 @@
+<%- include("includes/head") %>
+<%- include("includes/nav") %>
+
+<div class="container">
+
+  <div class="row">
+    <div class="col-lg-2"></div>
+    
+    <div class="col-lg-8 my-3">
+
+      <h1 class="text-center">CIA - Cubo Interativo das Árvores</h1>
+      <p class="text-center lead">Árvores cadastradas abaixo</p>
+
+      <%- include("includes/messages") %>
+      
+      <% if(arvores.length >  0 ){ %>
+        <div class="responsive-table">
+          <table class="table my-3">
+            <% arvores.forEach(arvore => {%>
+
+              <tr>
+                <td><%= arvore.nome %></td>
+                <td><%= arvore.copa %></td>
+                <td><%= arvore.origem %></td>
+                <td><%= arvore.bioma %></td>
+                 <td><a href="/arvore/index/<%= arvore._id%>">Editar</a></td>
+                 <td><a class="text-danger" href="/arvore/delete/<%= arvore._id%>">Excluir</a></td>
+                
+              </tr>
+            <% });%>
+          </table>
+        </div>
+
+      <% }else {%>
+
+        <p class="text-center alert alert-info">Não existem árvores cadastradas.</p>
+
+      <% }%>
+
+    </div>
+    
+    <div class="col-lg-2"></div>
+
+  </div>
+
+</div>
+
+<%- include("includes/footer") %>
