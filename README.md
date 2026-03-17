@@ -26,3 +26,9 @@
     				</driver>
                 </drivers>
             </datasources>
+
+
+
+
+
+pastas para o module.xml e o mysql-connector-j-9.6.0.zip (extrai e pega o .jar dentro e joga para fora):  wildfly.../modules/system/layers/base/com/mysql/main
