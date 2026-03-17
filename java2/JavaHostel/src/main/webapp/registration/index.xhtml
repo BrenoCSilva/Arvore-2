@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:h="http://xmlns.jcp.org/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  template="/WEB-INF/templates/decorator.xhtml">
+	  
+	  <ui:define name="title">Registration</ui:define>
+	  <ui:define name="contents">
+	  	<header>
+	  		<h2>Registration</h2>
+	  	</header>
+	 
+	  	<p>Escreva seus dados para ser um hospede em Java Hostel</p>
+	  	
+	  	
+	  	<h:form>
+	  	
+	  		<p>Name:
+	  		 <h:inputText id="name" value="#{registrationController.guest.name}"/> </p>
+	  		
+	  		<p>BirthDate:
+	  		 <h:inputText id="birthDate" value="#{registrationController.guest.birthDate }"/> 
+	  		 
+	  		 	<f:convertDateTime pattern="dd/MM/yyyy"/>
+	  		 </p>
+	  		
+	  		<p>Email:
+	  		 <h:inputSecret id="email" value="#{registrationController.guest.name.email}"/> </p>
+	  		
+	  		<p>Password:
+	  		 <h:inputText id="password" value="#{registrationController.guest.name.password}"/> </p>
+	  			  		
+	  		<p> <h:commandButton action="#{registrationController.register}" value="Register"/> </p>
+	  	</h:form>
+	  	
+	  </ui:define>
+
+</ui:composition>
