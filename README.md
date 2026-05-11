@@ -90,15 +90,9 @@ Para aplicar esse conhecimentos vamos criar nosso próprio módulo.
 4. Não é necessário fazer nenhum processamento com os dados recebido no item 2, apenas repasse direto via publisher no item 3. (Tome cuidado com os tipos das structs que estão sendo recebidas e enviadas).
 5. Crie um makefile e compile o código. Se tudo tiver certo, podemos testar! :)
 
-Obs: Outros módulos já utilizam de métodos de publisher e subscriber dessas mensagens, então você deve reutilizar esses métodos já aplicados. Você pode utilizar o comando ./grep_all que fica dentro de astro/bin para encontrar outros códigos que utilizam as structs necessárias.
+Observação I: É necessário modificar a função `handler`, pois ela será utilizada para implementar a lógica do Publish. No entanto, para o primeiro passo, você pode deixá-la vazia (ou printando algo), apenas para realizar testes iniciais com o Subscribe.
 
-### Anotações Bruno:
-
-**Replicar e Simplificar**: Replique o exemplo `simple_module_example` e execute-o. Em seguida, remova qualquer parte do código que não seja necessária.
-
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXcH8jSDYp0-w1zapIaGi8dZOGH-NyjvEJK7Cjt7hVkRDIYmohCOAxoCrxYC_w9upRnnlvbxtACwm5ymoMkSLd8cHkAlpEyxdXVEtCT6mtDF9e2E1weKQn6oBz8GeUsvqXrivP28?key=z6YPq4aOMJRxIcAMJnYHJA)
-
-Observação: É necessário modificar a função `handler`, pois ela será utilizada para implementar a lógica do Publish. No entanto, para o primeiro passo, você pode deixá-la vazia (ou printando algo), apenas para realizar testes iniciais com o Subscribe.
+Observação II : Outros módulos já utilizam de métodos de publisher e subscriber dessas mensagens, então você deve reutilizar esses métodos já aplicados. Você pode utilizar o comando ./grep_all que fica dentro de astro/bin para encontrar outros códigos que utilizam as structs necessárias.
 
 **Buscar Implementações Relevantes**: Use o comando `./grep_all` no terminal para localizar implementações relacionadas ao que você deseja encontrar. Por exemplo, para buscar códigos relacionados a `astro_robot_ackerman_motion_command_message`, digite:
 ```
@@ -121,7 +115,7 @@ Dica: Examine diversos códigos para identificar um "padrão" de implementação
 
 ## Tarefa 2# - Testando o módulo
 
-Para testar este módulo criado você deverá seguir os passos para execução de um Process e Simulator Mode. Com todo o sistema rodando perfeitamente, você deve:
+Para testar este módulo criado você deverá seguir os passos para execução de um [Process](https://github.com/LumeRobotics/docs/blob/main/Tutorials/ASTRO/sistema_lume_mobilidade_autonoma/sistema_lume_mobilidade_autonoma_pt-BR.md) e [Simulator Mode](https://github.com/LumeRobotics/docs/blob/main/Tutorials/ASTRO/simulator_mode/simulator_mode.md). Com todo o sistema rodando perfeitamente, você deve:
 
 1. Inserir o veículo no mapa, clicando em Place Robot
 2. Marcar o destino com Place Final Goal
@@ -132,11 +126,16 @@ Se tudo tiver de acordo o veículo deve trafegar sem nenhum problema até o dest
 
 ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXd_C_Wy4JJu3HUXKBnqtTjAQMyC6oGoPj5mqMk478UNC-K6tTP5ReP_QbmjbMXB43LPB3Qy0hK1INdUO08P_cJs7h3i-YK8OPD6LazurB3afNCRSYQqPSZYjSE96r-kmNnc3aKHMDUAhIZmWLkwM12hofY?key=z6YPq4aOMJRxIcAMJnYHJA)
 
-Agora precisamos testar o módulo que foi criado em Tarefa #1, para isso você deve parar o processo do obstacle_avoider dentro do Proccontrol GUI. Para isso, basta clicar no processo obstacle_avoider no ProControl GUI e depois clicar em Stop. Assim o processo de ficar vermelho, como na imagem abaixo.
+Agora vamos expandir o módulo que foi criado na Tarefa #1, para entender a justificativa para a nova implementação você deve parar o processo do obstacle_avoider dentro do Proccontrol GUI. Para isso, basta clicar no processo obstacle_avoider no ProControl GUI e depois clicar em Stop. Assim o processo de ficar vermelho, como na imagem abaixo.
 
 ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXeYfgm8T6wlQOiuQjk4js-Gtk_8sBX3sZe7K6LSjhWrwKjEgRJUNdjuJr2axojwtpFcc2dWzk07IY38KiDh_o8Ih-pDINTPCIpL5UaVrF7gIUTyN24up1nDsyHSV_NJAfLfQjIfLHDnjcoYBSM9PHy7850U?key=z6YPq4aOMJRxIcAMJnYHJA)
 
-Ao fazer isso, e tentar trafegar com o veículo novamente, você irá observar que o mesmo não irá andar. Então agora você deve compilar e rodar o seu código da Tarefa #1.
+Ao fazer isso, e tentar trafegar com o veículo novamente, você irá observar que o mesmo não irá andar. Então agora você deve compilar e rodar o seu código da Tarefa #1 atualizado para que o veículo volte a andar.
+
+De maneira geral, quando o sistema de mobilidade autonoma está sendo executado através de um processo, módulos são executados. Esses módulos enviam e recebem mensagens de feedback para quem estiver escutando o seu tipo de mensagem. Então você não precisa publicar uma mensagem do tipo `astro_robot_ackerman_motion_command_message` para escutar seus valores sendo atualizados, desde que o sistema esteja atualizando ele.
+
+É isso que acontece com o módulo `obstacle-avoider` do process-navigate_primeiros_passos_sensorbox-6_mss.ini(tem que ser o mss!) . Quando o simulador navigate está executando, constantemente ele envia mensagens do tipo astro_robot_ackerman_motion_command_message (veja isso através do seu subscribe, você irá identificar que a sua publicação manual anterior não será  mais necessária). 
+
 
 Se tudo der certo, ao rodar seu arquivo executável, seu veículo começará a andar novamente.
 
