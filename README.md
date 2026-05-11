@@ -138,9 +138,9 @@ Ao fazer isso, e tentar trafegar com o veículo novamente, você irá observar q
 
 ### Por que o veículo para quando o `obstacle_avoider` é interrompido?
 
-Isso acontece devido a uma medida de segurança implementada no módulo de baixo nível.O fluxo de comunicação funciona em cascata: o planejador envia as rotas para o `obstacle_avoider`, que as processa e as repassa continuamente para o simulador (através da mensagem `ASTRO_BASE_ACKERMAN_MOTION_COMMAND_NAME`).
+Isso acontece devido a uma medida de segurança implementada no módulo. O fluxo de comunicação funciona em cascata: o planejador envia as rotas para o `obstacle_avoider`, que as processa e as repassa continuamente para o simulador (através da mensagem `ASTRO_BASE_ACKERMAN_MOTION_COMMAND_NAME`).
 
-O astro_robot_ackerman_motion_command_message possui o atributo astro_robot_and_trailers_motion_command_t *motion_command para descrever a trajetória **futura** e **desejada** que o planejador quer que o veículo faça . Assim que o `obstacle_avoider` recebe essa struct, baseado nos procedimentos de validação, se a trajetória causará uma colisão ou uma aceleração perigosa, ele **altera os comandos originais da struct** (recalculando *v* para frear o carro, por exemplo).
+O astro_robot_ackerman_motion_command_message possui o atributo `astro_robot_and_trailers_motion_command_t *motion_command` para descrever a trajetória **futura** e **desejada** que o planejador quer que o veículo faça . Assim que o `obstacle_avoider` recebe essa struct, baseado nos procedimentos de validação, se a trajetória causará uma colisão ou uma aceleração perigosa, ele **altera os comandos originais da struct** (recalculando *v* para frear o carro, por exemplo).
 
 Depois dessa modificação de segurança, ele pega esses dados já filtrados e os empacota em **outra** mensagem (`astro_base_ackerman_motion_command_message`), enviando-a finalmente para as rodas do carro ou para o simulador executarem.
 
