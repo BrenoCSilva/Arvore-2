@@ -53,6 +53,13 @@ astro_simple_handler(astro_string_example_message *current_message)
 }
 ```
 
+### Anotações Bruno:
+
+**Replicar e Simplificar**: Replique o exemplo `simple_module_example` e execute-o. Em seguida, remova qualquer parte do código que não seja necessária.
+
+![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXcH8jSDYp0-w1zapIaGi8dZOGH-NyjvEJK7Cjt7hVkRDIYmohCOAxoCrxYC_w9upRnnlvbxtACwm5ymoMkSLd8cHkAlpEyxdXVEtCT6mtDF9e2E1weKQn6oBz8GeUsvqXrivP28?key=z6YPq4aOMJRxIcAMJnYHJA)
+
+
 ## Criando um Módulo no Astro
 
 Para criar um módulo no Astro precisamos começar criando uma pasta dentro de `astro/src`. Dentro desta basta criar os arquivos .c e .h necessários para o desenvolvimento do módulo.
