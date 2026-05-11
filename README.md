@@ -157,5 +157,6 @@ Se tudo der certo, ao rodar seu arquivo executável, seu veículo começará a a
 Para continuar seu aprendizado, siga para o próximo tutorial: [Implementando Parâmetros em seu Módulo](./implementing_parameters_in_modules.md)
 
 
+// Observação: Atente-se para o fato de que <variable> é o nome do parametro nomeado em {"<module_name>", "<param_name>", ASTRO_PARAM_ONOFF, &var, 1, NULL}.
 
 
