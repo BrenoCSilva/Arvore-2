@@ -105,7 +105,7 @@ Identifique e documente em qual parte do código essa referência aparece.
 
 Esta imagem ilustra o uso do comando `grep_all`. Podemos observar como ele retorna a linha e o arquivo onde o código está localizado. Assim, você pode abrir o arquivo correspondente e analisar exemplos de estruturas e o uso de cada função para auxiliar na implementação do seu código.
 
-Dica: Examine diversos códigos para identificar um "padrão" de implementação.
+Dica: Examine diversos códigos para identificar um "padrão" de implementação. Para ajudar no entendimento, saiba que a struct `astro_robot_ackerman_motion_command_message` é justamente a **interface de entrada principal** do `obstacle_avoider`.  O `obstacle_avoider` se inscreve (através da função `astro_robot_ackerman_subscribe_motion_command`) para receber mensagens do tipo `astro_robot_ackerman_motion_command_message` publicadas por módulos de alto nível (como o `navigator_ackerman` ou o `motion_planner` e agora do seu próprio módulo criado também).
 
 **Testar o Subscribe**: Após localizar as funções necessárias para implementar o Subscribe, incorpore-as no código. Em seguida, execute o programa e verifique se ele funciona corretamente.
 
