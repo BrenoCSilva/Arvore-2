@@ -138,15 +138,17 @@ Ao fazer isso, e tentar trafegar com o veículo novamente, você irá observar q
 
 ### Por que o veículo para quando o `obstacle_avoider` é interrompido?
 
-Isso acontece devido a uma medida de segurança implementada no módulo de baixo nível.
+Isso acontece devido a uma medida de segurança implementada no módulo de baixo nível.O fluxo de comunicação funciona em cascata: o planejador envia as rotas para o `obstacle_avoider`, que as processa e as repassa continuamente para o simulador (através da mensagem `ASTRO_BASE_ACKERMAN_MOTION_COMMAND_NAME`).
 
-O fluxo de comunicação funciona em cascata: o planejador envia as rotas para o `obstacle_avoider`, que as processa e as repassa continuamente para o simulador (através da mensagem `ASTRO_BASE_ACKERMAN_MOTION_COMMAND_NAME`).
+O astro_robot_ackerman_motion_command_message possui o atributo astro_robot_and_trailers_motion_command_t *motion_command para descrever a trajetória **futura** e **desejada** que o planejador quer que o veículo faça . Assim que o `obstacle_avoider` recebe essa struct, baseado nos procedimentos de validação, se a trajetória causará uma colisão ou uma aceleração perigosa, ele **altera os comandos originais da struct** (recalculando *v* para frear o carro, por exemplo).
+
+Depois dessa modificação de segurança, ele pega esses dados já filtrados e os empacota em **outra** mensagem (`astro_base_ackerman_motion_command_message`), enviando-a finalmente para as rodas do carro ou para o simulador executarem.
 
 O `base_ackerman` possui um mecanismo interno que monitora o tempo decorrido desde o último comando de movimento recebido (um parâmetro chamado `motion_timeout`). Quando você mata o processo do `obstacle_avoider` no Proccontrol, ele para de enviar essas mensagens de controle. Assim que o tempo limite é excedido, o simulador assume que houve uma falha crítica de comunicação e, por segurança, ele limpa a fila de comandos e zera a velocidade do veículo (`target_v = 0`), forçando-o a parar imediatamente. O sistema nunca permite que o veículo continue andando "às cegas" se parar de receber comandos.
 
-Então, a grande questão é que o obstacle_avoider parou de publicar informações ASTRO_BASE_ACKERMAN_MOTION_COMMAND_NAME e o sistema (por segurança) parou o veículo. Então agora você deve compilar e rodar o seu código da Tarefa #1 atualizado para que o veículo volte a andar.Sua tarefa é forçar o envio dessas informações que obstacle_avoider não faz mais.
+Então, o grande problema é que o obstacle_avoider parou de publicar informações ASTRO_BASE_ACKERMAN_MOTION_COMMAND_NAME e o sistema (por segurança) parou o veículo. Então agora você deve compilar e rodar o seu código da Tarefa #1 atualizado para que o veículo volte a andar. Sua tarefa é forçar o envio dessas informações que obstacle_avoider não faz mais.
 
-Dica: user o ./grep_all
+Dica: use o ./grep_all
 
 Se tudo der certo, ao rodar seu arquivo executável, seu veículo começará a andar novamente.
 
