@@ -16,7 +16,12 @@ Caso o seu retorno seja algo parecido com isso, significa que sim:
 [FOTO]
 
 
- O texto gnuplot> no início da linha indica que o gnuplot está pronto para receber comandos, que devem ser digitados após o gnuplot>. Por exemplo: gnuplot> plot cos(x).
+ O texto gnuplot> no início da linha indica que o gnuplot está pronto para receber comandos, que devem ser digitados após o gnuplot>. Por exemplo: 
+
+````bash
+                                                             plot cos(x).
+
+````
 
 Alguns comandos básicos do gnuplot:
 
