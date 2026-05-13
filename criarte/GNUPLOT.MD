@@ -32,6 +32,16 @@ Alguns comandos básicos do gnuplot:
 | **Nomear eixos**         | gnuplot> set xlabel "eixo X" |                    
 | **Inserir título**       | gnuplot> set title "meu título"  | 
 | **Inserir grade**        | gnuplot> set grid                        |
-| **Uso de memória**       | Mais (overhead de ponteiros) | 
-| **Cache-Friendly**       | Não                          | 
+| **Gerar gráfico 2D**       | gnuplot> plot x | 
+| **Gerar gráfico 3D**       | gnuplot> splot x*y                          | 
 | **Encerra gnuplot**         |  gnuplot> quit               | 
+
+Obs: Para executar as alteracões realizadas com set é necessário usar o comando `gnuplot> replot` para que aconteça uma atualização. Algo parecido vale para caso se deseja gerar dois ou mais gráficos ao mesmo tempo, após o comando plot(2D) ou splot(3D) o próximo gráfico exige o replot. Exemplo: gnuplot> splot sin(x) / gnuplot> replot cos(x). 
+
+
+
+
+
+
+
+Por ser um software independente (um programa instalado no seu PC). O C não importa uma biblioteca específica para utiliza-lo, ele utiliza a próprio stdio.h para abrir um "cano" (pipe) e conversar com o programa.
