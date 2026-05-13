@@ -19,7 +19,7 @@ Caso o seu retorno seja algo parecido com isso, significa que sim:
  O texto gnuplot> no início da linha indica que o gnuplot está pronto para receber comandos, que devem ser digitados após o gnuplot>. Por exemplo: 
 
 ````bash
-                                                             plot cos(x).
+plot cos(x).
 
 ````
 
