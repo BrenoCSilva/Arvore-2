@@ -10,7 +10,7 @@ Para confirmar se o programa do Gnuplot está instalado na sua máquina execute 
 
 ````
 
-Caso o seu retorno seja algo parecido com isso, significa que sim.
+Caso o seu retorno seja algo parecido com isso, significa que sim:
 
 
 [FOTO]
@@ -18,4 +18,15 @@ Caso o seu retorno seja algo parecido com isso, significa que sim.
 
  O texto gnuplot> no início da linha indica que o gnuplot está pronto para receber comandos, que devem ser digitados após o gnuplot>. Por exemplo: gnuplot> plot cos(x).
 
-Alguns comandos no gnuplot:
+Alguns comandos básicos do gnuplot:
+
+
+
+| Característica           | Lista Encadeada              | 
+|--------------------------|------------------------------|
+| **Nomear eixos**         | gnuplot> set xlabel "eixo X" |                    
+| **Inserir título**       | gnuplot> set title "meu título"  | 
+| **Inserir grade**        | gnuplot> set grid                        |
+| **Uso de memória**       | Mais (overhead de ponteiros) | 
+| **Cache-Friendly**       | Não                          | 
+| **Encerra gnuplot**         |  gnuplot> quit               | 
