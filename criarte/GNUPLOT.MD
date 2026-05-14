@@ -56,11 +56,22 @@ A manipulação do Gnuplot em C é quase idêntica à manipulação de um arquiv
 | Operação           | Arquivo Comum (stdio.h)              | Gnuplot (Pipe)  |
 |--------------------------|------------------------------|--------------------------|
 | **Declaração**         |FILE *arquivo; |                    FILE *gnuplot_pipe; |
-| **Abertura**       | fopen("arquivo.txt", "w");  | popen("gnuplot", "w"); |
-| **IEscrita**        | fprintf(arquivo, "texto");| fprintf(gnuplot_pipe, "plot..."); |
+| **Abertura**       | fopen("arquivo.txt", "w");  | popen("gnuplot", "modo"); |
+| **Escrita**        | fprintf(arquivo, "texto");| fprintf(gnuplot_pipe, "plot..."); |
 | **Fechamento**       | fclose(arquivo); | pclose(gnuplot_pipe);|
 | **Gerar gráfico 3D**       | gnuplot> splot x*y                          | 
 | **Encerra gnuplot**         |  gnuplot> quit               | 
 
+O comando popen (Pipe Open) cria um canal de comunicação entre processos. O argumento "gnuplot" invoca o executável do software, e o modo "w" (write) define que o seu programa C é o "mestre" que envia as ordens.
 
+O popen (Pipe Open) não abre um arquivo comum, ele abre um programa.
+- O argumento "gnuplot" é o nome do executável que o sistema operacional vai procurar e rodar em segundo plano.
+- O “modo” representa a operação que se deseja efetuar e definem a direção do fluxo de dados entre o seu programa e o Gnuplot. Na prática, existem dois modos principais: "w" (Write / Escrita)
+O que faz: Abre o Gnuplot e permite que o seu programa C envie comandos para ele.
+UsoEnviar comandos como set title, plot 'arquivo.txt' ou os próprios dados via plot '-' ; 
+
+2. Modo "r" (Read / Leitura)
+
+O que faz: Abre o Gnuplot e permite que o seu programa C leia o que o Gnuplot imprime no terminal (a saída padrão dele).
+Uso: Capturar informações de erro ou coordenadas que o Gnuplot calculou
 
