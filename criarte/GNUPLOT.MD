@@ -10,13 +10,17 @@ Para confirmar se o programa do Gnuplot está instalado na sua máquina execute 
 
 ````
 
-Caso o seu retorno seja algo parecido com isso, significa que sim:
+Caso o seu retorno seja algo parecido com isso, significa que a instalação já foi realizada:
 
 
 [FOTO]
 
 
- O texto gnuplot> no início da linha indica que o gnuplot está pronto para receber comandos, que devem ser digitados após o gnuplot>. Por exemplo: 
+Em caso contrário, execute o comando sugerido no terminal:
+
+[FOTO]
+
+ O texto `gnuplot>` no início da linha indica que o gnuplot está pronto para receber comandos, que devem ser digitados após o gnuplot>. Por exemplo: 
 
 ````bash
                                                                 plot cos(x)
