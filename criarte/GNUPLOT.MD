@@ -70,6 +70,6 @@ O popen (Pipe Open) não abre um arquivo comum, ele abre um programa.
 
 | Modo           | Arquivo Comum (stdio.h)              | Gnuplot (Pipe)  |
 |--------------------------|------------------------------|--------------------------|
-| **"w" (Write / Escrita)** |Abre o Gnuplot e permite que o seu programa C envie comandos para ele. | Enviar comandos como set title, plot 'arquivo.txt' ou os próprios dados via plot '-'|
-| **"r" (Read / Leitura)** | Abre o Gnuplot e permite que o seu programa C leia o que o Gnuplot imprime no terminal (a saída padrão dele)|Capturar informações de erro ou coordenadas que o Gnuplot calculou |
+| **"w" (Write)** |Abre o Gnuplot e permite que o seu programa C envie comandos | Enviar comandos como `set title`, `plot 'arquivo.txt'` ou os próprios dados via `plot '-'`|
+| **"r" (Read)** | Abre o Gnuplot e permite que o seu programa C leia o que o Gnuplot imprime via terminal |Capturar informações de erro ou coordenadas que o Gnuplot calculou|
 
