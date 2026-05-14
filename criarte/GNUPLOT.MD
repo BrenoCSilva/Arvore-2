@@ -79,10 +79,13 @@ Aqui você envia os dados diretamente da memória RAM para o gráfico, sem criar
 
 obs: todo comando enviado ao gnuplot deve terminar com '\n'.
 
-O Pipe recebe as informações e as projeta em colunas. O primeiro valor lido vai para coluna 1 e portanto é plotado no eixo_x. Tanto no contexto que ele recebe do seu código diretamente os valores ou puxa do arquivo.txt ele organiza as informações desse modo: primeiro valor lido vai para o eixo_X, segundo valor lido vai pra o eixo_Y etc. Caso se deseja alterar sem modificar a ordem em que os dados estão indo, é possível usar o comando `using`, em um exemplo 2D você poderia enviar a 2º coluna para o eixo_X e a 1º coluna para o eixo_Y desse modo:
+O Gnuplot interpreta as informações recebidas (seja via arquivo .txt ou diretamente da memória RAM) como uma tabela organizada em colunas.A Regra Padrão: Por padrão, o Gnuplot associa a primeira coluna de dados ao eixo $X$ e a segunda coluna ao eixo Y.O Mapeamento: Se você enviar uma linha com 4.5 1.2, o Gnuplot entenderá que 4.5 é a Coluna 1 (X) e 1.2 é a Coluna 2 (Y).
 
-fprintf(gnuplot_pipeMP, "plot '-'");
-fprintf(gnuplot_pipeMP, " using 2:1  \n");
+### Mudando a Ordem com o using
+Caso você queira alterar qual dado vai para qual eixo sem precisar mudar a ordem no seu código C, utilizamos o parâmetro using. Ele permite mapear as colunas da forma que você desejar seguindo o formato `using <eixo X>:<eixo Y>`. Exemplo:
+
+`fprintf(gnuplot_pipeMP, "plot '-'");
+fprintf(gnuplot_pipeMP, " using 2:1  \n");`
 
 
 Obs: Assim que o Gnuplot recebe o \n após o plot '-', ele para de aceitar comandos e só aceita números (ou o e para sair desse modo). Então tenha cuidado, caso a houvesse o '\n' no primeiro fprintf ele daria erro ao ler o usign pois estaria esperando dados.
