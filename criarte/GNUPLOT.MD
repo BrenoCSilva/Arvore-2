@@ -62,7 +62,7 @@ O comando de abertura `popen` (Pipe Open) cria um canal de comunicação entre s
 - O argumento "gnuplot" é o nome do executável que o sistema operacional vai procurar e rodar em segundo plano.
 - O “modo” representa a operação que se deseja efetuar e define a direção do fluxo de dados entre o seu programa e o Gnuplot. Na prática, existem dois modos principais: 
 
-| Modo           | Arquivo Comum (stdio.h)              | Gnuplot (Pipe)  |
+| Modo           | Descrição           | Exemplo  |
 |--------------------------|------------------------------|--------------------------|
 | **"w"(Write)** |Abre o Gnuplot e permite que o seu programa C envie comandos | Enviar comandos como `set title`, `plot 'arquivo.txt'` ou os próprios dados via `plot '-'`|
 | **"r"(Read)** | Abre o Gnuplot e permite que o seu programa C leia o que o Gnuplot imprime via terminal |Capturar informações de erro ou coordenadas que o Gnuplot calculou|
