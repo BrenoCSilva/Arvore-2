@@ -1,4 +1,6 @@
 
+# Gnuplot tutorial
+
 O Gnuplot é um software utilitário de terminal para geração de gráficos 2D e 3D. Podendo ser utilizado em diferentes plataformas: Windows, Linux, Mac, Android etc. 
 
 Os gráficos podem ser gerados diretamente via terminal, por um arquivo externo e até mesmo através de um executável em C. 
@@ -27,9 +29,7 @@ Em caso contrário, execute o comando sugerido no terminal:
 
 ````
 
-Alguns comandos básicos do gnuplot:
-
-
+## Alguns comandos básicos do gnuplot
 
 | Descrição           | Comando              | 
 |--------------------------|------------------------------|
@@ -43,9 +43,7 @@ Alguns comandos básicos do gnuplot:
 Obs: Para executar as alteracões realizadas com set é necessário usar o comando `gnuplot> replot` para que aconteça uma atualização. Algo parecido vale para caso se deseja gerar dois ou mais gráficos ao mesmo tempo. Após o comando plot(2D) ou splot(3D) o próximo gráfico exige o uso do replot. Exemplo: gnuplot> splot sin(x) / gnuplot> replot cos(x). 
 
 
+## Gnuplot em C
 
-
-
-
-
+- Em programas acadêmicos simples.
 Por ser um software independente (um programa instalado no seu PC). O C não importa uma biblioteca específica para utiliza-lo, ele utiliza a próprio stdio.h para abrir um "cano" (pipe) e conversar com o programa.
