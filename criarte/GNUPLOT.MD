@@ -76,47 +76,29 @@ Existem duas principais maneiras de enviar ao gnuplot os valores que se deseja p
 fprintf(gnuplot_pipe, "seu_arquivo.txt"); pegue os dados desse arquivo
 fprintf(gnuplot_pipe, "-");pegue os dados da RAM 
 
-obs: todo comando enviando ao gnuplot deve terminar com '\n'os
+obs: todo comando enviando ao gnuplot deve terminar com '\n'
 
-Na situação em que está se utilizando o arquivo.txt
-
-O Pipe recebe as informações as projeta em colunas. O primeiro valor lido vai para coluna 1 e portanto é plotado no eixo_x por exemplo. Tanto no contexto que ele recebe do seu código diretamente os valores ou puxa do arquivo.txt ele organiza as informações desse modo: primeiro valor lido vai para o eixo_X. Caso se deseja alterar sem modificar a ordem em que os dados estão indo, é possível usar o comando `using`, em um exemplo 2D você poderia enviar a 2º coluna para o eixo_X e a 1º coluna para o eixo_Y desse modo:
+O Pipe recebe as informações e as projeta em colunas. O primeiro valor lido vai para coluna 1 e portanto é plotado no eixo_x. Tanto no contexto que ele recebe do seu código diretamente os valores ou puxa do arquivo.txt ele organiza as informações desse modo: primeiro valor lido vai para o eixo_X, segundo valor lido vai pra o eixo_Y etc. Caso se deseja alterar sem modificar a ordem em que os dados estão indo, é possível usar o comando `using`, em um exemplo 2D você poderia enviar a 2º coluna para o eixo_X e a 1º coluna para o eixo_Y desse modo:
 
 fprintf(gnuplot_pipeMP, "plot '-'");
 fprintf(gnuplot_pipeMP, " using 2:1  \n");
 
 
+Obs: Assim que o Gnuplot recebe o \n após o plot '-', ele para de aceitar comandos e só aceita números (ou o e para sair desse modo). Então tenha cuidado, caso a houvesse o '\n' no primeiro fprintf ele daria erro ao ler o usign pois estaria esperando dados.
+
+
+Por padrão, o gnuplot vai plotar os pontos que estão sendo recebidos caso se deseja projetar os segmentos de reta que ligam os pontos basta inserir após o plot a abreviação ´ẃ l ´ ou por extenso: fprintf(gnuplot_pipeMP, "plot '-' with lines \n");
+
+
+obs: É possível configurar o set title, set grid, etc, em linhas diferentes (antes do plot). Mas o using, o with lines e o title fazem parte do comando plot. Eles são paramêtros do plot e devem ir juntos com ele.
 
 
 
-Assim que o Gnuplot recebe o \n após o plot '-', ele para de aceitar comandos e só aceita números (ou o e para sair desse modo).
+| Operação           | Arquivo Comum (stdio.h)              | Gnuplot (Pipe)  |
+|--------------------------|------------------------------|--------------------------|
+| **De onde o Gnuplot busca os dados**         | fprintf(gnuplot_pipeMP, "plot '-' \n"); |  fprintf(gnuplot_pipeMP, "plot 'arquivo.txt' \n"); |
+| **Enviar os os dados**       | fprintf(gnuplot_pipeMP, "%d %d\n", eixo_X[i], eixo_Y[i]);  | fprintf(gnuplot_pipeMP, "plot 'vd_debug.txt'\n"); |
+| **Finalizar envio dos dados **        | fprintf(gnuplot_pipeMP, "e\n");| Não precisa |
 
 
-
-
-
-
-
-
-
-----------------------------------------------------------------------------
-
-Por que usar o Histórico é essencial?
-O Gnuplot é um programa de "redesenho". Toda vez que você envia o comando plot, ele apaga o gráfico anterior e faz um novo.
-
-Se você enviar apenas o ponto atual, o gráfico anterior some e fica apenas um ponto novo.
-
-Se você enviar o histórico inteiro a cada vez, o gráfico parece "crescer" e formar uma linha contínua na tela.
-
-Dica para o Tutorial: Você pode explicar que o plot '-' funciona como se você estivesse "re-escrevendo" o livro inteiro a cada nova página para que o leitor (usuário) veja a história completa desde o início.
-
-Respondendo suas dúvidas:
-"Não posso configurar o setup em duas linhas diferentes?"
-
-Pode configurar o set title, set grid, etc, em linhas diferentes (antes do plot). Mas o using, o with lines e o title fazem parte do comando plot. Eles são "sobrenomes" do plot e devem ir juntos com ele.
-
-"Depois de mandar o plot - tenho que mandar os dados?"
-
-Exatamente. Assim que o Gnuplot recebe o \n após o plot '-', ele para de aceitar comandos e só aceita números (ou o e para sair desse modo).
-
-
+O Gnuplot é um programa de "redesenho". Toda vez que ocorre o envio do comando plot, ele apaga o gráfico anterior e faz um novo. Caso se envie apenas o ponto atual, o gráfico anterior some e fica apenas um ponto novo. Então em ambos os casos é necessário manter um histórico de valores minimos, quando usar o arquivo.txt ele se torna seu histórico, para o outro modelo é preciso criar uma lista de valores e armazenar uma quantia deles antes de plotar.
