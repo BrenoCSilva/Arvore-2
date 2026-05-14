@@ -20,7 +20,7 @@ Em caso contrário, execute o comando sugerido no terminal:
 
 [FOTO]
 
- O texto `gnuplot>` no início da linha indica que o gnuplot está pronto para receber comandos, que devem ser digitados após o gnuplot>. Por exemplo: 
+ O texto `gnuplot>` no início da linha indica que o gnuplot está pronto para receber comandos. Por exemplo: 
 
 ````bash
                                                                 plot cos(x)
