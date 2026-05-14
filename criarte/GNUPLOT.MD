@@ -31,7 +31,7 @@ Alguns comandos básicos do gnuplot:
 
 
 
-| Característica           | Lista Encadeada              | 
+| Descrição           | Comando              | 
 |--------------------------|------------------------------|
 | **Nomear eixos**         | gnuplot> set xlabel "eixo X" |                    
 | **Inserir título**       | gnuplot> set title "meu título"  | 
@@ -40,7 +40,7 @@ Alguns comandos básicos do gnuplot:
 | **Gerar gráfico 3D**       | gnuplot> splot x*y                          | 
 | **Encerra gnuplot**         |  gnuplot> quit               | 
 
-Obs: Para executar as alteracões realizadas com set é necessário usar o comando `gnuplot> replot` para que aconteça uma atualização. Algo parecido vale para caso se deseja gerar dois ou mais gráficos ao mesmo tempo, após o comando plot(2D) ou splot(3D) o próximo gráfico exige o replot. Exemplo: gnuplot> splot sin(x) / gnuplot> replot cos(x). 
+Obs: Para executar as alteracões realizadas com set é necessário usar o comando `gnuplot> replot` para que aconteça uma atualização. Algo parecido vale para caso se deseja gerar dois ou mais gráficos ao mesmo tempo. Após o comando plot(2D) ou splot(3D) o próximo gráfico exige o uso do replot. Exemplo: gnuplot> splot sin(x) / gnuplot> replot cos(x). 
 
 
 
