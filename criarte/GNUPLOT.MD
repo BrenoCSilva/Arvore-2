@@ -59,8 +59,6 @@ A manipulação do Gnuplot em C é quase idêntica à manipulação de um arquiv
 | **Abertura**       | fopen("arquivo.txt", "w");  | popen("gnuplot", "modo"); |
 | **Escrita**        | fprintf(arquivo, "texto");| fprintf(gnuplot_pipe, "plot..."); |
 | **Fechamento**       | fclose(arquivo); | pclose(gnuplot_pipe);|
-| **Gerar gráfico 3D**       | gnuplot> splot x*y                          | 
-| **Encerra gnuplot**         |  gnuplot> quit               | 
 
 O comando popen (Pipe Open) cria um canal de comunicação entre processos. O argumento "gnuplot" invoca o executável do software, e o modo "w" (write) define que o seu programa C é o "mestre" que envia as ordens.
 
