@@ -85,6 +85,7 @@ O Gnuplot interpreta as informações recebidas (seja via arquivo .txt ou direta
 Caso você queira alterar qual dado vai para qual eixo sem precisar mudar a ordem no seu código C, utilizamos o parâmetro using. Ele permite mapear as colunas da forma que você desejar seguindo o formato `using <eixo X>:<eixo Y>`. Exemplo:
 
 `fprintf(gnuplot_pipeMP, "plot '-'");
+
 fprintf(gnuplot_pipeMP, " using 2:1  \n");`
 
 
