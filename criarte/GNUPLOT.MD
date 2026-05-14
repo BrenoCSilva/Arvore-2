@@ -42,8 +42,25 @@ Em caso contrário, execute o comando sugerido no terminal:
 
 Obs: Para executar as alteracões realizadas com set é necessário usar o comando `gnuplot> replot` para que aconteça uma atualização. Algo parecido vale para caso se deseja gerar dois ou mais gráficos ao mesmo tempo. Após o comando plot(2D) ou splot(3D) o próximo gráfico exige o uso do replot. Exemplo: gnuplot> splot sin(x) / gnuplot> replot cos(x). 
 
+- Exemplo de sinalização.
 
 ## Gnuplot em C
 
-- Em programas acadêmicos simples.
-Por ser um software independente (um programa instalado no seu PC). O C não importa uma biblioteca específica para utiliza-lo, ele utiliza a próprio stdio.h para abrir um "cano" (pipe) e conversar com o programa.
+Por ser um software independente (um programa instalado no seu PC) o C não importa uma biblioteca específica para usa-lo, ocorre a  utilização da própria stdio.h para fazer a abertura de um "cano/tubulação" (pipe) que através do seu código C envia comandos de texto que o Gnuplot executa e renderiza em tempo real.
+
+
+A manipulação do Gnuplot em C é quase idêntica à manipulação de um arquivo comum, mudando apenas as funções de sistema:
+
+
+
+| Operação           | Arquivo Comum (stdio.h)              | Gnuplot (Pipe)  |
+|--------------------------|------------------------------|
+| **Declaração**         |FILE *arquivo; |                    FILE *gnuplot_pipe;
+| **Abertura**       | fopen("arquivo.txt", "w");  | popen("gnuplot", "w");
+| **IEscrita**        | fprintf(arquivo, "texto");| fprintf(gnuplot_pipe, "plot..."); |
+| **Fechamento**       | fclose(arquivo); | pclose(gnuplot_pipe);
+| **Gerar gráfico 3D**       | gnuplot> splot x*y                          | 
+| **Encerra gnuplot**         |  gnuplot> quit               | 
+
+
+
