@@ -69,12 +69,19 @@ O comando de abertura `popen` (Pipe Open) cria um canal de comunicação entre s
 
 ## Como enviar informações para o gnuplot?
 
-Existem duas principais maneiras de enviar ao gnuplot os valores que se deseja plotar, você pode mandar diferetamente enviando dados da memória RAM para o gráfico, ou salvando na memória secundária através de um arquivo.txt por exemplo. A depender da sua escolha você deve sinalizar ao gnuplot de maneira diferente:
+Existem duas estratégias principais para alimentar o Gnuplot com as informações que você deseja visualizar. A escolha depende se o objetivo é apenas ver o gráfico em tempo real ou se é necessário guardar um registro físico dos dados.
 
-fprintf(gnuplot_pipe, "seu_arquivo.txt"); pegue os dados desse arquivo
-fprintf(gnuplot_pipe, "-");pegue os dados da RAM 
+1. Via Memória Secundária (arquivo.txt)
+Nesta abordagem, seu programa em C salva os dados no disco rígido primeiro, e depois diz ao Gnuplot para abrir esse arquivo.
 
-obs: todo comando enviando ao gnuplot deve terminar com '\n'
+Sinaliza ao Gnuplot através do comando: `fprintf(gnuplot_pipe, "seu_arquivo.txt\n");`
+
+2. Via Memória Primária (via RAM)
+Aqui você envia os dados diretamente da memória RAM para o gráfico, sem criar arquivos intermediários. 
+
+Sinaliza ao Gnuplot através do comando: fprintf(gnuplot_pipe, "plot '-' \n");
+
+obs: todo comando enviado ao gnuplot deve terminar com '\n'.
 
 O Pipe recebe as informações e as projeta em colunas. O primeiro valor lido vai para coluna 1 e portanto é plotado no eixo_x. Tanto no contexto que ele recebe do seu código diretamente os valores ou puxa do arquivo.txt ele organiza as informações desse modo: primeiro valor lido vai para o eixo_X, segundo valor lido vai pra o eixo_Y etc. Caso se deseja alterar sem modificar a ordem em que os dados estão indo, é possível usar o comando `using`, em um exemplo 2D você poderia enviar a 2º coluna para o eixo_X e a 1º coluna para o eixo_Y desse modo:
 
