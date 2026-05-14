@@ -69,3 +69,54 @@ O comando de abertura `popen` (Pipe Open) cria um canal de comunicação entre s
 | **"w"(Write)** |Abre o Gnuplot e permite que o seu programa C envie comandos | Enviar comandos como `set title`, `plot 'arquivo.txt'` ou os próprios dados via `plot '-'`|
 | **"r"(Read)** | Abre o Gnuplot e permite que o seu programa C leia o que o Gnuplot imprime via terminal |Capturar informações de erro ou coordenadas que o Gnuplot calculou|
 
+## Como enviar informações para o gnuplot?
+
+Existem duas principais maneiras de enviar ao gnuplot os valores que se deseja plotar, você pode mandar diferetamente enviando dados da memória RAM para o gráfico, ou salvando na memória secundária através de um arquivo.txt por exemplo. A depender da sua escolha você deve sinalizar ao gnuplot de maneira diferente:
+
+fprintf(gnuplot_pipe, "seu_arquivo.txt"); pegue os dados desse arquivo
+fprintf(gnuplot_pipe, "-");pegue os dados da RAM 
+
+obs: todo comando enviando ao gnuplot deve terminar com '\n'os
+
+Na situação em que está se utilizando o arquivo.txt
+
+O Pipe recebe as informações as projeta em colunas. O primeiro valor lido vai para coluna 1 e portanto é plotado no eixo_x por exemplo. Tanto no contexto que ele recebe do seu código diretamente os valores ou puxa do arquivo.txt ele organiza as informações desse modo: primeiro valor lido vai para o eixo_X. Caso se deseja alterar sem modificar a ordem em que os dados estão indo, é possível usar o comando `using`, em um exemplo 2D você poderia enviar a 2º coluna para o eixo_X e a 1º coluna para o eixo_Y desse modo:
+
+fprintf(gnuplot_pipeMP, "plot '-'");
+fprintf(gnuplot_pipeMP, " using 2:1  \n");
+
+
+
+
+
+Assim que o Gnuplot recebe o \n após o plot '-', ele para de aceitar comandos e só aceita números (ou o e para sair desse modo).
+
+
+
+
+
+
+
+
+
+----------------------------------------------------------------------------
+
+Por que usar o Histórico é essencial?
+O Gnuplot é um programa de "redesenho". Toda vez que você envia o comando plot, ele apaga o gráfico anterior e faz um novo.
+
+Se você enviar apenas o ponto atual, o gráfico anterior some e fica apenas um ponto novo.
+
+Se você enviar o histórico inteiro a cada vez, o gráfico parece "crescer" e formar uma linha contínua na tela.
+
+Dica para o Tutorial: Você pode explicar que o plot '-' funciona como se você estivesse "re-escrevendo" o livro inteiro a cada nova página para que o leitor (usuário) veja a história completa desde o início.
+
+Respondendo suas dúvidas:
+"Não posso configurar o setup em duas linhas diferentes?"
+
+Pode configurar o set title, set grid, etc, em linhas diferentes (antes do plot). Mas o using, o with lines e o title fazem parte do comando plot. Eles são "sobrenomes" do plot e devem ir juntos com ele.
+
+"Depois de mandar o plot - tenho que mandar os dados?"
+
+Exatamente. Assim que o Gnuplot recebe o \n após o plot '-', ele para de aceitar comandos e só aceita números (ou o e para sair desse modo).
+
+
