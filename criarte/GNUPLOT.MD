@@ -7,14 +7,14 @@ Os gráficos podem ser gerados diretamente via terminal, por um arquivo externo 
 
 ## Tópicos
 1. [Instalação do Gnuplot](#instalação-do-Gnuplot)
-2. [Alguns comandos básicos do gnuplot](#Alguns comandos básicos do gnuplot)
-3. [Gnuplot em C](## Gnuplot em C)
-4. [Como enviar informações para o gnuplot?](## Como enviar informações para o gnuplot?)
-4.1 [Enviando as coordenadas](### Enviando as coordenadas)
-4.2 [Mudando a Ordem com o using](### Mudando a Ordem com o using)
-5. [Estilizando o Gráfico: Pontos x Linhas](## Estilizando o Gráfico: Pontos x Linhas)
-6. [Resumo](## Resumo)
-7. [Tarefa](## Tarefa)
+2. [Alguns comandos básicos do gnuplot](#alguns-comandos-básicos-do-gnuplot)
+3. [Gnuplot em C](#gnuplot-em-C)
+4. [Como enviar informações para o gnuplot?](#como-enviar-informações-para-o-gnuplot)
+4.1 [Enviando as coordenadas](#enviando-as-coordenadas)
+4.2 [Mudando a Ordem com o using](#mudando-a-ordem-com-o-using)
+5. [Estilizando o Gráfico: Pontos x Linhas](#estilizando-o-gráfico-pontos-x-Linhas)
+6. [Resumo](#resumo)
+7. [Tarefa](#tarefa)
 
 ## Instalação do Gnuplot
 Para confirmar se o programa do Gnuplot está instalado na sua máquina execute o comando abaixo no seu terminal:
