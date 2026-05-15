@@ -16,6 +16,7 @@ Caso o seu retorno seja algo parecido com isso, significa que a instalação já
 
 
 [FOTO]
+<img src="/terminal_gnuplot_fail.png" width="200" title="terminal_gnuplot_fail">
 
 
 Em caso contrário, execute o comando sugerido no terminal:
