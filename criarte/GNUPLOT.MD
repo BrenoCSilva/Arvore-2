@@ -5,6 +5,18 @@ O Gnuplot é um software utilitário de terminal para geração de gráficos 2D 
 
 Os gráficos podem ser gerados diretamente via terminal, por um arquivo externo e até mesmo através de um executável em C. 
 
+## Tópicos
+1. [Instalação do Gnuplot](##Instalação do Gnuplot)
+2. [Alguns comandos básicos do gnuplot](## Alguns comandos básicos do gnuplot)
+3. [Gnuplot em C](## Gnuplot em C)
+4. [Como enviar informações para o gnuplot?](## Como enviar informações para o gnuplot?)
+4.1 [Enviando as coordenadas](### Enviando as coordenadas)
+4.2 [Mudando a Ordem com o using](### Mudando a Ordem com o using)
+5. [Estilizando o Gráfico: Pontos x Linhas](## Estilizando o Gráfico: Pontos x Linhas)
+6. [Resumo](## Resumo)
+7. [Tarefa](## Tarefa)
+
+##Instalação do Gnuplot
 Para confirmar se o programa do Gnuplot está instalado na sua máquina execute o comando abaixo no seu terminal:
 
 ````bash
@@ -89,7 +101,7 @@ Caso você queira alterar qual dado vai para qual eixo sem precisar mudar a orde
 
 Obs: O caractere quebra de linha funciona como o botão "Enter" do Gnuplot. Assim que ele recebe um \n após o comando plot '-', ele entra no modo de dados e para de aceitar configurações. Se houvesse um \n logo após o plot '-' no primeiro fprintf, o Gnuplot acharia que a palavra using já era um dado numérico, resultando em erro de leitura.
 
-###Estilizando o Gráfico: Pontos vs. Linhas
+## Estilizando o Gráfico: Pontos x Linhas
 Por padrão, o Gnuplot desenha apenas os pontos isolados no gráfico. Para visualizar a continuidade dos dados, é necessário instruí-lo a ligar esses pontos com segmentos de reta.
 
 Para isso, utilizamos o parâmetro with lines (ou a abreviação w l) logo após o comando de plotagem:
@@ -98,7 +110,7 @@ fprintf(gnuplot_pipeMP, "plot '-' with lines \n");
 
 obs: É possível configurar o set title, set grid, etc, em linhas diferentes (antes do plot). Mas o using, o with lines e o title fazem parte do comando plot. Eles são paramêtros do plot e devem ir juntos com ele.
 
-
+## Resumo
 
 | Descrição           |   Via Memória Primária (via RAM)           | Via Memória Secundária (arquivo.txt) |
 |--------------------------|------------------------------|--------------------------|
