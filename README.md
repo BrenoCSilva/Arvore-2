@@ -134,7 +134,7 @@ Se tudo tiver de acordo o veículo deve trafegar sem nenhum problema até o dest
 
 De maneira geral, quando o sistema de mobilidade autonoma está sendo executado através de um processo, módulos são executados. Esses módulos enviam e recebem mensagens de feedback para quem estiver escutando o seu tipo de mensagem. Então você não precisa publicar uma mensagem do tipo `astro_robot_ackerman_motion_command_message` para escutar seus valores sendo atualizados, desde que o sistema esteja atualizando ele.
 
-É isso que acontece com o módulo `obstacle-avoider` do process-navigate_primeiros_passos_sensorbox-6_mss.ini. Quando o simulador navigate está executando, constantemente ele envia mensagens do tipo astro_robot_ackerman_motion_command_message (veja isso através do seu subscribe, você irá identificar que a sua publicação manual anterior não será  mais necessária). 
+É isso que acontece com o módulo `obstacle-avoider` do process-navigate_primeiros_passos_sensorbox-6_mss.ini. Quando o simulador navigate está executando constantemente ele envia mensagens do tipo astro_robot_ackerman_motion_command_message (veja isso através do seu subscribe, você irá identificar que a sua publicação manual anterior não será  mais necessária). 
 
 Agora vamos expandir o módulo que foi criado na Tarefa #1, para entender a justificativa para a nova implementação você deve parar o processo do obstacle_avoider dentro do Proccontrol GUI. Para isso, basta clicar no processo obstacle_avoider no ProControl GUI e depois clicar em Stop. Assim o processo de ficar vermelho, como na imagem abaixo.
 
