@@ -108,7 +108,8 @@ Esta imagem ilustra o uso do comando `grep_all`. Podemos observar como ele retor
 > [!NOTE]
 > ALTERAÇÃO REALIZADA AQUI!
 
-Dica: Examine diversos códigos para identificar um "padrão" de implementação. Para ajudar no entendimento, saiba que a struct `astro_robot_ackerman_motion_command_message` é justamente a **interface de entrada principal** do `obstacle_avoider`.  O `obstacle_avoider` é um módulo do sistema de mobilidade autonoma, que se inscreve (através da função `astro_robot_ackerman_subscribe_motion_command`) para receber mensagens do tipo `astro_robot_ackerman_motion_command_message` publicadas por módulos de alto nível (como o `navigator_ackerman` ou o `motion_planner` e agora do seu próprio módulo criado também).
+Dica: Examine diversos códigos para identificar um "padrão" de implementação. Para facilitar sua compreensão, considere a struct `astro_robot_ackerman_motion_command_message` como a __interface primária de entrada__ de dados do `obstacle_avoider`. O `obstacle_avoider` é o módulo de segurança do sistema de mobilidade autônoma. Ele atua como um ouvinte ativo para receber e processar os comandos de movimento. Tais comandos são orquestrados e publicados por módulos de alto nível, como o `navigator_ackerman`, o `motion_planner` ou até mesmo instâncias customizadas como a do seu novo módulo.
+
 
 **Testar o Subscribe**: Após localizar as funções necessárias para implementar o Subscribe, incorpore-as no código. Em seguida, execute o programa e verifique se ele funciona corretamente.
 
@@ -132,27 +133,32 @@ Se tudo tiver de acordo o veículo deve trafegar sem nenhum problema até o dest
 > [!NOTE]
 > ALTERAÇÃO REALIZADA AQUI!
 
-De maneira geral, quando o sistema de mobilidade autonoma está sendo executado através de um processo, módulos são executados. Esses módulos enviam e recebem mensagens de feedback para quem estiver escutando o seu tipo de mensagem. Então você não precisa publicar uma mensagem do tipo `astro_robot_ackerman_motion_command_message` para escutar seus valores sendo atualizados, desde que o sistema esteja atualizando ele.
+De maneira geral, o sistema de mobilidade autônoma opera através da execução contínua de vários módulos em paralelo. À medida que o sistema é executado, seus diversos módulos trocam mensagens continuamente. Qualquer módulo que deseje ler essas informações só precisa se inscrever (*subscribe*) para "escutá-las". Portanto, você não precisa publicar mensagens do tipo `astro_robot_ackerman_motion_command_message` manualmente para ver os valores mudando, desde que o próprio sistema esteja rodando para alimentar esse fluxo de dados.
 
-É isso que acontece com o módulo `obstacle-avoider` do process-navigate_primeiros_passos_sensorbox-6_mss.ini. Quando o simulador navigate está executando constantemente ele envia mensagens do tipo astro_robot_ackerman_motion_command_message (veja isso através do seu subscribe, você irá identificar que a sua publicação manual anterior não será  mais necessária). 
+É exatamente isso que ocorre com o `obstacle_avoider` configurado no arquivo `process-navigate_primeiros_passos_sensorbox-6.ini`. Enquanto o simulador de navegação estiver ativo, ele publicará essas mensagens de comando de forma constante. Você poderá comprovar isso apenas observando o seu módulo *subscriber* sendo executado: a publicação manual que você fez na etapa anterior não será mais necessária.
 
-Agora vamos expandir o módulo que foi criado na Tarefa #1, para entender a justificativa para a nova implementação você deve parar o processo do obstacle_avoider dentro do Proccontrol GUI. Para isso, basta clicar no processo obstacle_avoider no ProControl GUI e depois clicar em Stop. Assim o processo de ficar vermelho, como na imagem abaixo.
+Agora, vamos expandir as funcionalidades do módulo criado na __Tarefa #1__. Para compreender a justificativa prática dessa nova implementação, precisaremos forçar a parada do `obstacle_avoider`. Para fazer isso, vá até o __Proccontrol GUI__, selecione o processo `obstacle_avoider` e clique em __Stop__. O processo deverá ficar vermelho na interface, indicando a interrupção, conforme mostra a imagem abaixo.
+
 
 ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXeYfgm8T6wlQOiuQjk4js-Gtk_8sBX3sZe7K6LSjhWrwKjEgRJUNdjuJr2axojwtpFcc2dWzk07IY38KiDh_o8Ih-pDINTPCIpL5UaVrF7gIUTyN24up1nDsyHSV_NJAfLfQjIfLHDnjcoYBSM9PHy7850U?key=z6YPq4aOMJRxIcAMJnYHJA)
 
 Ao fazer isso, e tentar trafegar com o veículo novamente, você irá observar que o mesmo não irá andar. 
 
+
+> [!NOTE]
+> ALTERAÇÃO REALIZADA AQUI!
+
 ### Por que o veículo para quando o `obstacle_avoider` é interrompido?
 
-Isso acontece devido a uma medida de segurança implementada no módulo. O fluxo de comunicação funciona em cascata: o planejador envia as rotas para o `obstacle_avoider`, que as processa e as repassa continuamente para o simulador (através da mensagem `ASTRO_BASE_ACKERMAN_MOTION_COMMAND_NAME`).
+Isso ocorre devido a uma rigorosa medida de segurança do sistema. O fluxo de controle do veículo funciona em cascata: o módulo de planejamento gera as rotas e as envia para o `obstacle_avoider`, que, por sua vez, as valida e as repassa continuamente para a camada de baixo nível ou simulador (através da mensagem `ASTRO_BASE_ACKERMAN_MOTION_COMMAND_NAME`).
 
-O astro_robot_ackerman_motion_command_message possui o atributo `astro_robot_and_trailers_motion_command_t *motion_command` para descrever a trajetória **futura** e **desejada** que o planejador quer que o veículo faça . Assim que o `obstacle_avoider` recebe essa struct, baseado nos procedimentos de validação, se a trajetória causará uma colisão ou uma aceleração perigosa, ele **altera os comandos originais da struct** (recalculando *v* para frear o carro, por exemplo).
+Para entender esse processo, vale lembrar que a mensagem de planejamento possui o atributo `motion_command` (do tipo `astro_robot_and_trailers_motion_command_t`), que descreve exatamente a trajetória __futura__ e __desejada__ para o robô. Assim que o `obstacle_avoider` intercepta essa estrutura, ele aplica seus algoritmos de segurança. Se detectar que a rota causará uma colisão ou exige uma aceleração perigosa, ele __altera os comandos originais__ na mesma hora (recalculando a velocidade *v* para acionar os freios, por exemplo).
 
-Depois dessa modificação de segurança, ele pega esses dados já filtrados e os empacota em **outra** mensagem (`astro_base_ackerman_motion_command_message`), enviando-a finalmente para as rodas do carro ou para o simulador executarem.
+Após essa filtragem, o `obstacle_avoider` empacota os dados já validados em uma __nova__ mensagem (`astro_base_ackerman_motion_command_message`) e a publica. É apenas essa nova mensagem que tem autoridade final sobre o que as rodas do veículo devem de fato executar.
 
-O `base_ackerman` possui um mecanismo interno que monitora o tempo decorrido desde o último comando de movimento recebido (um parâmetro chamado `motion_timeout`). Quando você mata o processo do `obstacle_avoider` no Proccontrol, ele para de enviar essas mensagens de controle. Assim que o tempo limite é excedido, o simulador assume que houve uma falha crítica de comunicação e, por segurança, ele limpa a fila de comandos e zera a velocidade do veículo (`target_v = 0`), forçando-o a parar imediatamente. O sistema nunca permite que o veículo continue andando "às cegas" se parar de receber comandos.
+Na outra ponta dessa comunicação, o módulo `base_ackerman` possui um mecanismo que monitora o tempo decorrido desde o recebimento do último comando (controlado pelo parâmetro `motion_timeout`). Quando você força a parada do processo `obstacle_avoider` via Proccontrol, o envio dessas mensagens de controle é interrompido. Ao atingir o tempo limite sem instruções, o sistema assume que houve uma falha crítica de comunicação. Imediatamente, ele limpa a fila de execução e zera a velocidade do carro. O veículo jamais tem permissão para continuar andando "às cegas".
 
-Então, o grande problema é que o obstacle_avoider parou de publicar informações ASTRO_BASE_ACKERMAN_MOTION_COMMAND_NAME e o sistema (por segurança) parou o veículo. Então agora você deve compilar e rodar o seu código da Tarefa #1 atualizado para que o veículo volte a andar. Sua tarefa é forçar o envio dessas informações que obstacle_avoider não faz mais.
+A situação atual é a seguinte: sem o `obstacle_avoider` publicando as informações, o mecanismo de proteção atuou e travou o carro. __Sua tarefa agora__ é suprir essa falta de comunicação. Você deverá atualizar, compilar e executar o código da __Tarefa #1__ para forçar o envio dessas mensagens, assumindo temporariamente o papel de publicação do `obstacle_avoider` e garantindo que o veículo volte a andar.
 
 Dica: use o ./grep_all
 
