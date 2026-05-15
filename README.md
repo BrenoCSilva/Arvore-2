@@ -107,6 +107,7 @@ Esta imagem ilustra o uso do comando `grep_all`. Podemos observar como ele retor
 
 > [!NOTE]
 > ALTERAÇÃO REALIZADA AQUI!
+
 Dica: Examine diversos códigos para identificar um "padrão" de implementação. Para ajudar no entendimento, saiba que a struct `astro_robot_ackerman_motion_command_message` é justamente a **interface de entrada principal** do `obstacle_avoider`.  O `obstacle_avoider` é um módulo do sistema de mobilidade autonoma, que se inscreve (através da função `astro_robot_ackerman_subscribe_motion_command`) para receber mensagens do tipo `astro_robot_ackerman_motion_command_message` publicadas por módulos de alto nível (como o `navigator_ackerman` ou o `motion_planner` e agora do seu próprio módulo criado também).
 
 **Testar o Subscribe**: Após localizar as funções necessárias para implementar o Subscribe, incorpore-as no código. Em seguida, execute o programa e verifique se ele funciona corretamente.
