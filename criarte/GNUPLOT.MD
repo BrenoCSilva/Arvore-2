@@ -6,7 +6,7 @@ O Gnuplot é um software utilitário de terminal para geração de gráficos 2D 
 Os gráficos podem ser gerados diretamente via terminal, por um arquivo externo e até mesmo através de um executável em C. 
 
 ##Tópicos
-1. [Instalação do Gnuplot](# Instalação do Gnuplot)
+1. [Instalação do Gnuplot](#Instalação do Gnuplot)
 2. [Alguns comandos básicos do gnuplot](#Alguns comandos básicos do gnuplot)
 3. [Gnuplot em C](## Gnuplot em C)
 4. [Como enviar informações para o gnuplot?](## Como enviar informações para o gnuplot?)
