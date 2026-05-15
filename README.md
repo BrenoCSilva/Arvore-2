@@ -126,6 +126,8 @@ Se tudo tiver de acordo o veículo deve trafegar sem nenhum problema até o dest
 
 ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXd_C_Wy4JJu3HUXKBnqtTjAQMyC6oGoPj5mqMk478UNC-K6tTP5ReP_QbmjbMXB43LPB3Qy0hK1INdUO08P_cJs7h3i-YK8OPD6LazurB3afNCRSYQqPSZYjSE96r-kmNnc3aKHMDUAhIZmWLkwM12hofY?key=z6YPq4aOMJRxIcAMJnYHJA)
 
+[!WARNING] perigo
+
 De maneira geral, quando o sistema de mobilidade autonoma está sendo executado através de um processo, módulos são executados. Esses módulos enviam e recebem mensagens de feedback para quem estiver escutando o seu tipo de mensagem. Então você não precisa publicar uma mensagem do tipo `astro_robot_ackerman_motion_command_message` para escutar seus valores sendo atualizados, desde que o sistema esteja atualizando ele.
 
 É isso que acontece com o módulo `obstacle-avoider` do process-navigate_primeiros_passos_sensorbox-6_mss.ini(tem que ser o mss!) . Quando o simulador navigate está executando, constantemente ele envia mensagens do tipo astro_robot_ackerman_motion_command_message (veja isso através do seu subscribe, você irá identificar que a sua publicação manual anterior não será  mais necessária). 
